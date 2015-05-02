@@ -11,19 +11,16 @@
         padding: 0;
         margin: 0;
       }
-
       #layer_selector {
         position: absolute;
         top: 20px;
         right: 20px;
         padding: 0;
       }
-
       #layer_selector ul {
         padding: 0; margin: 0;
         list-style-type: none;
       }
-
       #layer_selector li {
         border-bottom: 1px solid #999;
         padding: 15px 30px;
@@ -32,12 +29,10 @@
         color: #444;
         cursor: auto;
       }
-
       #layer_selector li:hover {
         background-color: #F0F0F0;
         cursor: pointer;
       }
-
       #layer_selector li.selected {
         background-color:#D7D1CF;
       }
@@ -63,31 +58,25 @@
       // create layer selector
       function createSelector(layer) {
         var sql = new cartodb.SQL({ user: 'documentation' });
-
         var $options = $('#layer_selector li');
         $options.click(function(e) {
           // get the area of the selected layer
           var $li = $(e.target);
           var felt = $li.attr('data');
-
           // deselect all and select the clicked one
           $options.removeClass('selected');
           $li.addClass('selected');
-
           // create query based on data from the layer
           var query = "select * from earthquakes";
-
           if(felt !== 'all') {
             console.log('hello')
             query = "select * from earthquakes where felt = " + felt;
           }
           console.log(query)
-
           // change the query in the layer to update the map
           layer.setSQL(query);
         });
       }
-
       function main() {
         cartodb.createVis('map', 'https://carys.cartodb.com/api/v2/viz/a7207f88-e85c-11e4-91a2-0e49835281d6/viz.json', {
           tiles_loader: true,
@@ -97,6 +86,7 @@
         })
         .done(function(vis, layers) {
           // layer 0 is the base layer, layer 1 is cartodb layer
+          console.log"finished function"
           var subLayer = layers[1].getSubLayer(0);
           createSelector(subLayer);
         })
@@ -104,7 +94,6 @@
           console.log(err);
         });
       }
-
       window.onload = main;
     </script>
   </body>
