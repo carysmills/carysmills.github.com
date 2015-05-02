@@ -75,6 +75,7 @@
           console.log(query)
           // change the query in the layer to update the map
           layer.setSQL(query);
+          console.log("finished function")
         });
       }
       function main() {
@@ -86,7 +87,7 @@
         })
         .done(function(vis, layers) {
           // layer 0 is the base layer, layer 1 is cartodb layer
-          console.log"finished function"
+
           var subLayer = layers[1].getSubLayer(0);
           createSelector(subLayer);
         })
