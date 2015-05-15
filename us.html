@@ -42,15 +42,20 @@
   </head>
   <body>
     <div id="map"></div>
-    <div id="layer_selector" class="cartodb-infobox">
-      <ul>
-        <li data-felt="all" class="selected">All earthquakes</li>
-        <li data-felt="true">Felt earthquake</li>
-        <li data-felt="false"> Not felt earthquakes</li>
-       
-      </ul>
-    </div>
-
+<div id="cartocss" class="layer_selector">
+            <p id="js-crime-selector">TRAVEL SELECTOR</p>
+            <ul class="LayerSelector-list">
+                <li data="0">Total Canadian visits 2012
+                </li>
+                <li data="1">Total Canadian visits 2010
+                </li>
+                <li data="2">Same-day visits 2012
+                </li>
+                <li data="3">Non-fare spending 2012
+                </li>
+            </ul>
+        </div>
+        
     <!-- include cartodb.js library -->
     <script src="https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.14/cartodb.js"></script>
 
@@ -81,10 +86,10 @@
         });
       }
       function main() {
-        cartodb.createVis('map', 'https://carys.cartodb.com/api/v2/viz/a7207f88-e85c-11e4-91a2-0e49835281d6/viz.json', {
+        cartodb.createVis('map', 'https://carys.cartodb.com/api/v2/viz/38768008-fa65-11e4-a9fb-0e0c41326911/viz.json', {
           tiles_loader: true,
-          center_lat: 60,
-          center_lon: -103,
+          center_lat: 41,
+          center_lon: -99,
           zoom: 3
         })
         .done(function(vis, layers) {
