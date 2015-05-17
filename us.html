@@ -44,11 +44,11 @@
     <div id="map"></div>
     <div id="layer_selector" class="cartodb-infobox">
       <ul>
-        <li data="all" class="selected">All countries</li>
-        <li data="1000">area >1000 km<sup>2</sup></li>
-        <li data="6000">area >6000 km<sup>2</sup></li>
-        <li data="10000">area >10000 km<sup>2</sup></li>
-        <li data="50000">area >50000 km<sup>2</sup></li>
+        <li data="all" class="selected">All states</li>
+        <li data="70000"<total_visits_2012 >1000 km<sup>2</sup></li>
+        <li data="6000">total_visits_2012 >6000 km<sup>2</sup></li>
+        <li data="10000">total_visits_2012 >10000 km<sup>2</sup></li>
+        <li data="50000">total_visits_2012 >50000 km<sup>2</sup></li>
       </ul>
     </div>
 
@@ -58,7 +58,7 @@
     <script>
       // create layer selector
       function createSelector(layer) {
-        var sql = new cartodb.SQL({ user: 'documentation' });
+        var sql = new cartodb.SQL({ user: 'carys' });
         var $options = $('#layer_selector li');
         $options.click(function(e) {
           // get the area of the selected layer
@@ -68,9 +68,9 @@
           $options.removeClass('selected');
           $li.addClass('selected');
           // create query based on data from the layer
-          var query = "select * from european_countries_e";
-          if(area !== 'all') {
-            query = "select * from european_countries_e where area > " + area;
+          var query = "select * from usvisits";
+          if(total_visits_2012 !== 'all') {
+            query = "select * from usvisits where total_visits_2012 > " + total_visits_2012;
           }
           // change the query in the layer to update the map
           layer.setSQL(query);
