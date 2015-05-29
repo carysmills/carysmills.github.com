@@ -1,7 +1,1 @@
-{
-        cartodb.createVis('map', 'https://carys.cartodb.com/api/v2/viz/163cc954-0094-11e5-840d-0e43f3deba5a/viz.json', {
-          tiles_loader: true,
-          center_lat: 60,
-          center_lon: -103,
-          zoom: 3
-        }
+https://carys.cartodb.com/api/v2/viz/163cc954-0094-11e5-840d-0e43f3deba5a/viz.json
