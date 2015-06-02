@@ -1,1 +1,105 @@
-<iframe width='100%' height='100%' frameborder='0' src='https://carys.cartodb.com/viz/163cc954-0094-11e5-840d-0e43f3deba5a/embed_map' allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ontario bridge conditions | CartoDB.js</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <link rel="shortcut icon" href="http://cartodb.com/assets/favicon.ico" />
+    <style>
+      html, body, #map {
+        height: 100%;
+        padding: 0;
+        margin: 0;
+      }
+
+      #layer_selector {
+        position: absolute;
+        top: 50px;
+        right: 20px;
+        padding: 0;
+      }
+
+      #layer_selector ul {
+        padding: 0; margin: 0;
+        list-style-type: none;
+      }
+
+      #layer_selector li {
+        border-bottom: 1px solid #999;
+        padding: 15px 30px;
+        font-family: "Arial", Arial;
+        font-size: 13px;
+        color: #444;
+        cursor: auto;
+      }
+
+      #layer_selector li:hover {
+        background-color: #F0F0F0;
+        cursor: pointer;
+      }
+
+      #layer_selector li.selected {
+        background-color: #EEE;
+      }
+    </style>
+
+    <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.14/themes/css/cartodb.css" />
+  </head>
+  <body>
+    <div id="map"></div>
+    <div id="layer_selector" class="cartodb-infobox">
+      <ul>
+        <li data="all" class="selected">All bridges</li>
+        <li data="60">BCI greater than 60</li>
+        <li data="80">BCI greater than 80</li>
+        <li data="90">BCI greater than 90</li>
+      </ul>
+    </div>
+
+    <!-- include cartodb.js library -->
+    <script src="http://libs.cartocdn.com/cartodb.js/v3/3.14/cartodb.js"></script>
+
+    <script>
+      // create layer selector
+      function createSelector(layer) {
+        var sql = new cartodb.SQL({ user: 'carys' });
+
+       var $options = $('#layer_selector li');
+        $options.click(function(e) {
+          // get the area of the selected layer
+          var $li = $(e.target);
+          var bci = $li.attr('data');
+          // deselect all and select the clicked one
+          $options.removeClass('selected');
+          $li.addClass('selected');
+          // create query based on data from the layer
+          var query = "select * from copy_of_19_bridge_condition_open_data_2014_upd";
+          if(bci !== 'all') {
+            query = "select * from copy_of_19_bridge_condition_open_data_2014_upd where bci > " + bci;
+          }
+          // change the query in the layer to update the map
+          layer.setSQL(query);
+        });
+      }
+
+      function main() {
+        cartodb.createVis('map', 'https://carys.cartodb.com/api/v2/viz/163cc954-0094-11e5-840d-0e43f3deba5a/viz.json', {
+          tiles_loader: true,
+          center_lat: 47,
+          center_lon: -84,
+          zoom: 6
+        })
+        .done(function(vis, layers) {
+          // layer 0 is the base layer, layer 1 is cartodb layer
+          var subLayer = layers[1].getSubLayer(0);
+          createSelector(subLayer);
+        })
+        .error(function(err) {
+          console.log(err);
+        });
+      }
+
+      window.onload = main;
+    </script>
+  </body>
+</html>
