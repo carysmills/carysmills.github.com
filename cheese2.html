@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Cheese consumption across the world</title>
+        <!-- import plugin script -->
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.js'></script>
+    </head>
+    <body>
+        <!-- bar chart canvas element -->
+        <canvas id="income" width="600" height="400"></canvas>
+        <script>
+         
+            // bar chart data
+            var barData = {
+                labels : ["Canada","Mexico","United States","Austria","Belgium","Croatia","Estonia","Finland","France","Germany","Hungary","Italy","Latvia","Lithuania", "Netherlands", "Poland", "Spain","Sweden","United Kingdom","Iceland","Norway","Russia","Switzerland","Ukraine","Iran","Israel","Turkey","Egypt","South Africa","Zimbabwe","Japan", "Australia", "New Zealand"],
+                
+
+                datasets : [
+                
+                    {
+                         fillColor: "#FFA62F",
+            strokeColor: "#FFA62F",
+            pointColor: "#FFA62F",
+            pointStrokeColor: "#FFA62F",
+            pointHighlightFill: "#FFA62F",
+            pointHighlightStroke: "rgba(220,220,220,1)",
+                        data : [12.2, 3.6, 15.4, 19.9, 15, 10.2, 21.7, 24.7, 25.9, 24.3, 11, 20.7, 16, 20.1, 18.6, 11.4, 9.5, 19.8, 11.6, 25.2, 18.1, 6.1, 21.3, 4.6, 4.9, 16.3, 7.6, 10.4, 
+                            1.7, 0.3, 2.2, 13.7, 8.7]
+                    }
+                ]
+            }
+
+
+            // get bar chart canvas
+            var income = document.getElementById("income").getContext("2d");
+            // draw bar chart
+            new Chart(income).Bar(barData, {
+                barValueSpacing : 3,
+                scaleShowVerticalLines: false,
+                animation: false,
+                multiTooltipTemplate: "<%= value + ' kg'%>",
+                scaleLabel: "<%= value + ' kg'%>",
+             });
+        </script>
+    </body>
+</html>
