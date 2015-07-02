@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Canadian cheese consumption</title>
+        <!-- import plugin script -->
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.js'></script>
+    </head>
+    <body>
+        <!-- line chart canvas element -->
+        <canvas id="cheese" width="600" height="400" ></canvas>    
+        <script>
+            // line chart data
+            var cheeseData = {
+                labels : ["1995","1996","1997","1998","1999","2000", "2001", "2002", "2003","2004","2005","2006","2007","2008","2009","2010","2011","2012","2013","2014"],
+                datasets : [
+                {
+            label: "Unprocessed cheese consuption per capita",
+            fillColor: "#FFA62F",
+            strokeColor: "#800080",
+            pointColor: "#FFA62F",
+            pointStrokeColor: "#800080",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(220,220,220,1)",
+            data : [10.87,10.70,11.82,11.48,11.54,11.85,11.48,11.54,11.64,11.96,12.04,12.22,12.40,12.58,12.54,12.59,12.51,12.25,12.69,12.02]
+                },
+                  {
+            label: "Specialty cheese consuption per capita",
+            fillColor: "#FFF380",
+            strokeColor: "#800080",
+            pointColor: "#FFF380",
+            pointStrokeColor: "#800080",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "#800080",
+                    data : [6.14,6.18,7.13,6.92,6.82,7.15,6.86,6.98,6.98,7.35,7.21,7.22,7.75,7.76,7.72,7.69,7.70,7.55,7.96,7.41]
+                  }
+
+    ]
+};
+
+            // get line chart canvas
+            var cheese = document.getElementById('cheese').getContext('2d');
+
+            // draw line chart
+            new Chart(cheese).Line(cheeseData, {
+            scaleShowGridLines : false,
+            animation: false,
+            scaleLabel: "<%= value + ' kg'%>",
+            multiTooltipTemplate: "<%= datasetLabel %> : <%= value + ' kg'%>",
+            tooltipFontSize: 12,
+        });
+
+        </script>
+    </body>
+</html>
